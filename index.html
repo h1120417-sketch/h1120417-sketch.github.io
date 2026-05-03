@@ -1,338 +1,469 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>趙萱霖 | 個人申請履歷</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root {
-            --bg-light: #F8F7F4; 
-            --primary-coffee: #3E2F21; 
-            --secondary-coffee: #7A624E;
-            --text-main: #333333;
-            --text-gray: #666666;
-            --highlight: #D8C3A5;
-            --border-light: rgba(122, 98, 78, 0.15);
-        }
+/* 1. THE SETUP & JAPANDI STYLE VARIABLES */
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Noto Sans TC', sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-main);
-            line-height: 1.65; /* 縮小行距讓閱讀更緊湊 */
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
+:root {
+  --bg-color: #F9F6F0; /* Pale warm cream (Japandi background) */
+  --text-primary: #3E2F21; /* Deep Coffee */
+  --text-secondary: #6B5A4B; /* Muted brown */
+  --accent-color: #8B6D53; /* Taupe/Coffee */
+  --border-color: #D8C3A5; /* Pale Beige */
+}
 
-        h1, h2, h3, h4 {
-            font-family: 'Noto Serif TC', serif;
-            color: var(--primary-coffee);
-        }
+body {
+  background-color: #e2e8f0;
+  display: grid;
+  gap: 30px;
+  grid-template-columns: 1fr;
+  margin: 0;
+  min-height: 100vh;
+  padding: 30px 0;
+  place-items: center;
+}
 
-        /* 導覽列 */
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background-color: rgba(248, 247, 244, 0.95); 
-            padding: 12px 40px; /* 縮小導覽列高度 */
-            display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-            backdrop-filter: blur(8px);
-        }
+.slide-container {
+  align-items: center;
+  background-color: var(--bg-color);
+  border-radius: 4px;
+  box-shadow: 0 15px 35px rgba(62, 47, 33, 0.08);
+  display: flex;
+  flex-direction: column;
+  font-family: 'Noto Sans TC', sans-serif;
+  height: 720px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 60px 80px;
+  position: relative;
+  width: 1280px;
+  -webkit-font-smoothing: antialiased;
+}
 
-        nav .logo { font-size: 1rem; font-weight: 700; color: var(--primary-coffee); cursor: pointer; }
-        
-        nav ul { list-style: none; display: flex; gap: 30px; }
-        nav ul li a { 
-            text-decoration: none; color: var(--secondary-coffee); 
-            font-size: 0.9rem; font-weight: 500; transition: color 0.2s; 
-        }
-        nav ul li a:hover { color: var(--primary-coffee); }
+/* 2. CONSISTENT TYPOGRAPHY (Magazine Editorial) */
 
-        /* 通用區塊設定 */
-        section { padding: 60px 8%; position: relative;}
-        
-        .section-title { 
-            font-size: 1.8rem; margin-bottom: 30px; 
-            font-weight: 700; display: flex; align-items: center; gap: 15px;
-        }
-        .section-title::after {
-            content: ''; flex: 1; height: 1px; background-color: var(--border-light);
-        }
+.slide-container h1,
+.slide-container h2,
+.slide-container h3,
+.slide-container .serif-text {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-family: 'Noto Serif TC', serif;
+  margin: 0;
+  letter-spacing: 1.5px;
+}
 
-        /* 首頁區 (大幅減少高度，不再佔滿全螢幕) */
-        #hero {
-            padding-top: 100px; padding-bottom: 30px;
-            text-align: center;
-        }
+.slide-container p,
+.slide-container li,
+.slide-container .subtitle {
+  color: var(--text-secondary);
+  font-family: 'Noto Sans TC', sans-serif;
+  line-height: 1.8;
+  font-weight: 300;
+}
 
-        #hero h1 { font-size: 3rem; margin-bottom: 5px; letter-spacing: 2px;}
-        .hero-subtitle { font-size: 1rem; color: var(--text-gray); margin-bottom: 20px; font-weight: 500;}
-        
-        .hero-info-bar {
-            display: flex; justify-content: center; align-items: center; gap: 15px; flex-wrap: wrap;
-        }
+.slide-container h1 {
+  font-size: 64px;
+  letter-spacing: 4px;
+}
 
-        .hero-tag {
-            background-color: white; color: var(--primary-coffee);
-            padding: 6px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 500;
-            border: 1px solid var(--border-light);
-        }
+.slide-container .slide-title {
+  font-size: 38px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  text-align: left;
+  width: 100%;
+  position: relative;
+}
 
-        .hero-badge {
-            background-color: var(--primary-coffee); color: white;
-            padding: 6px 16px; border-radius: 20px; font-size: 0.85rem;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .hero-badge i { color: var(--highlight); }
+.slide-container .slide-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--accent-color);
+  margin-top: 15px;
+}
 
-        /* 專題研究區塊 - 高效列表風 (List View) */
-        #portfolio { padding-top: 20px; }
-        
-        .portfolio-list {
-            display: flex; flex-direction: column; gap: 20px; /* 卡片間距縮小 */
-        }
+.slide-container h3 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
 
-        .portfolio-item {
-            display: flex; background-color: white; border-radius: 12px; overflow: hidden;
-            border: 1px solid var(--border-light);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .portfolio-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-        }
+.slide-container p,
+.slide-container li {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
 
-        /* 照片/圖示縮圖區 (固定寬度) */
-        .photo-thumb {
-            width: 220px; /* 固定縮圖寬度 */
-            background-color: #F1EBE6;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px; text-align: center; color: var(--secondary-coffee);
-            border-right: 1px solid var(--border-light);
-            position: relative;
-        }
-        .photo-thumb i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.7;}
-        .photo-thumb span { font-size: 0.8rem; font-weight: 500; }
-        .photo-thumb img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 2;
-        }
+.slide-container .content-area {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: center;
+  width: 100%;
+}
 
-        /* 內容區 */
-        .portfolio-content { 
-            flex: 1; padding: 25px 30px; display: flex; flex-direction: column; justify-content: center;
-        }
-        
-        .portfolio-header {
-            display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;
-        }
+/* 3. JAPANDI SPECIFIC UI ELEMENTS */
 
-        .portfolio-header h3 { font-size: 1.35rem; line-height: 1.3; margin: 0; }
-        
-        .category { 
-            font-size: 0.75rem; color: var(--secondary-coffee); font-weight: 700;
-            background-color: var(--bg-light); padding: 4px 10px; border-radius: 4px;
-            white-space: nowrap;
-        }
+.pill-tag {
+  display: inline-block;
+  background-color: transparent;
+  color: var(--accent-color);
+  border: 1px solid var(--border-color);
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 14px;
+  letter-spacing: 1px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
 
-        .portfolio-content p { 
-            color: var(--text-gray); font-size: 0.95rem; text-align: justify; margin-bottom: 12px; 
-        }
-        
-        .highlight-text { 
-            color: var(--primary-coffee); font-weight: 700;
-            background: linear-gradient(transparent 60%, rgba(216, 195, 165, 0.5) 60%);
-        }
+.highlight-text {
+  color: var(--text-primary);
+  font-weight: 500;
+  border-bottom: 2px solid var(--border-color);
+}
 
-        /* 標籤區縮小緊湊 */
-        .skill-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto;}
-        .skill-tag { 
-            font-size: 0.75rem; color: var(--text-gray);
-            padding: 3px 8px; border-radius: 4px; background-color: #F8F7F4;
-            border: 1px solid #EAEAEA;
-        }
+.image-wrapper {
+  border: 1px solid var(--border-color);
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  padding: 10px;
+  background-color: #fff;
+}
 
-        /* 申請動機區 */
-        #motivation {
-            background-color: white; margin: 40px 8%; border-radius: 12px;
-            padding: 40px; border: 1px solid var(--border-light);
-        }
-        #motivation .section-title { margin-bottom: 20px; }
+.image-wrapper img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
 
-        .motivation-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
-        }
+/* 4. LAYOUT DEFINITIONS */
 
-        .motivation-box p {
-            font-size: 0.95rem; color: var(--text-gray); margin-bottom: 15px; text-align: justify;
-        }
-        .motivation-box strong { color: var(--primary-coffee); }
+/* Title Slide */
+.title-layout {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
 
-        footer { text-align: center; padding: 20px; color: var(--text-gray); font-size: 0.8rem; }
+.title-layout h1 { margin-bottom: 15px; }
+.title-layout .subtitle { font-size: 20px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 50px;}
 
-        /* 響應式 */
-        @media (max-width: 900px) {
-            .motivation-grid { grid-template-columns: 1fr; gap: 15px; }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 15px 20px; flex-direction: column; gap: 10px; }
-            #hero { padding-top: 110px; }
-            section { padding: 40px 5%; }
-            #motivation { margin: 20px 5%; padding: 25px; }
-            .portfolio-item { flex-direction: column; }
-            .photo-thumb { width: 100%; height: 160px; border-right: none; border-bottom: 1px solid var(--border-light); }
-            .portfolio-header { flex-direction: column-reverse; gap: 8px; }
-        }
+.ace-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.ace-box {
+  text-align: center;
+  border: 1px solid var(--border-color);
+  padding: 20px 30px;
+  background-color: rgba(255,255,255,0.5);
+}
+
+.ace-box h2 { font-size: 32px; color: var(--accent-color); margin-bottom: 5px; }
+.ace-box p { font-size: 16px; margin: 0; color: var(--text-primary); font-weight: 500;}
+
+/* Section Title Layout */
+.section-title-layout {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  border: 1px solid var(--border-color);
+  background-color: rgba(255,255,255,0.4);
+}
+
+.section-title-layout h2 {
+  font-size: 52px;
+  margin-bottom: 20px;
+  color: var(--accent-color);
+}
+
+.section-title-layout p { font-size: 22px; letter-spacing: 3px;}
+
+/* Two Column Image Right Text Left */
+.two-column {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  width: 100%;
+}
+
+.two-column .text-content { padding-right: 20px; }
+.two-column .image-wrapper img { object-fit: contain; background-color: var(--bg-color); }
+
+/* Bleed Image Right */
+.slide-container.bleed-image-layout {
+  align-items: start;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0;
+}
+
+.slide-container.bleed-image-layout > .content-container {
+  padding: 80px 60px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.slide-container.bleed-image-layout > .image-container {
+  height: 100%;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slide-container.bleed-image-layout img.bleed-image-side {
+  display: block;
+  height: 720px;
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+}
+
+/* Two Column Tiled Text */
+.two-column.tiled {
+  align-items: stretch;
+  gap: 40px;
+}
+
+.two-column.tiled > div {
+  background-color: rgba(255,255,255,0.6);
+  border: 1px solid var(--border-color);
+  padding: 50px 40px;
+  text-align: left;
+}
+
+.two-column.tiled h3 { color: var(--accent-color); }
+
+/* Tiled Images */
+.tiled-content {
+  align-items: stretch;
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  width: 100%;
+}
+
+.image-tile {
+  flex: 1;
+  text-align: left;
+}
+
+.image-tile .image-wrapper {
+  height: 200px;
+  margin-bottom: 25px;
+  border: none;
+  padding: 0;
+}
+
+.image-tile h3 { font-size: 20px; margin-bottom: 10px;}
+.image-tile p { font-size: 15px; line-height: 1.6;}
+
+/* Q&A Layout */
+.qa-layout {
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  align-self: center;
+}
+
+.qa-layout h2 { font-size: 72px; margin-bottom: 20px; letter-spacing: 5px;}
+.qa-layout p { font-size: 20px; letter-spacing: 2px;}
     </style>
 </head>
 <body>
 
-    <!-- 導覽列 -->
-    <nav id="navbar">
-        <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">趙萱霖 Xuan-Lin Zhao</div>
-        <ul>
-            <li><a href="#portfolio">學習成果</a></li>
-            <li><a href="#motivation">申請動機</a></li>
-        </ul>
-    </nav>
-
-    <!-- 首頁區 (緊湊版) -->
-    <section id="hero">
+<!-- Slide 1: Title_Slide -->
+<div class="slide-container" id="slide1">
+    <div class="title-layout">
         <h1>趙萱霖</h1>
-        <div class="hero-subtitle">Personal Application Resume</div>
-        <div class="hero-info-bar" style="margin-bottom: 15px;">
-            <span class="hero-tag">適應 Adaptability</span>
-            <span class="hero-tag">審慎 Prudence</span>
-            <span class="hero-tag">理念 Ideals</span>
+        <p class="subtitle serif-text">Personal Application Portfolio</p>
+        
+        <div class="ace-container">
+            <div class="ace-box">
+                <h2>A</h2>
+                <p>適應 Adaptability</p>
+            </div>
+            <div class="ace-box">
+                <h2>C</h2>
+                <p>審慎 Prudence</p>
+            </div>
+            <div class="ace-box">
+                <h2>E</h2>
+                <p>理念 Ideals</p>
+            </div>
         </div>
-        <div class="hero-info-bar">
-            <span class="hero-badge"><i class="fas fa-award"></i> 全民英檢中高級 初試通過</span>
+
+        <div>
+            <span class="pill-tag" style="background-color: var(--text-primary); color: #fff; border:none;"><i class="fas fa-award"></i> 全民英檢中高級 初試通過</span>
+            <span class="pill-tag" style="background-color: var(--text-primary); color: #fff; border:none;"><i class="fas fa-certificate"></i> 多益 (TOEIC) 720分</span>
         </div>
-    </section>
+    </div>
+</div>
 
-    <!-- 學習成果列表區 -->
-    <section id="portfolio">
-        <h2 class="section-title">學習成果展示</h2>
+<!-- Slide 2: Section_Title -->
+<div class="slide-container" id="slide2">
+    <div class="section-title-layout">
+        <h2>Language & Literature</h2>
+        <p>語言能力與文學探討</p>
+    </div>
+</div>
 
-        <div class="portfolio-list">
-            <!-- 專案 1 -->
-            <div class="portfolio-item">
-                <div class="photo-thumb">
-                    <i class="fas fa-language"></i><span>放置：證書照片</span>
-                </div>
-                <div class="portfolio-content">
-                    <div class="portfolio-header">
-                        <h3>卓越外語能力與《Golden》閱讀反思</h3>
-                        <span class="category">Language</span>
-                    </div>
-                    <p>具備扎實外語實力，已取得<span class="highlight-text">全民英檢中高級初試通過</span>。在閱讀英文小說《Golden》時，對主角面對職涯迷惘產生共鳴，從她打破框架的過程獲取啟發，強化面對未知挑戰的心理韌性，並堅定追求理念的決心。</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">#外語溝通</span><span class="skill-tag">#文學反思</span><span class="skill-tag">#心理韌性</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 專案 2 -->
-            <div class="portfolio-item">
-                <div class="photo-thumb">
-                    <i class="fas fa-users"></i><span>放置：簡報照片</span>
-                </div>
-                <div class="portfolio-content">
-                    <div class="portfolio-header">
-                        <h3>孤獨危機探討 (Loneliness)</h3>
-                        <span class="category">Public Health</span>
-                    </div>
-                    <p>全英文專題探討青少年「數位悖論」，發現孤獨已成全球公衛危機。我主動研究國外解方（如英國孤獨大臣），並為國內現況提出對策，展現對國際新興議題的敏銳度與社會關懷。</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">#公共衛生</span><span class="skill-tag">#社會關懷</span><span class="skill-tag">#國際視野</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 專案 3 -->
-            <div class="portfolio-item">
-                <div class="photo-thumb">
-                    <i class="fas fa-brain"></i><span>放置：報告照片</span>
-                </div>
-                <div class="portfolio-content">
-                    <div class="portfolio-header">
-                        <h3>心理與法律選修：認識討好型人格</h3>
-                        <span class="category">Psychology</span>
-                    </div>
-                    <p>藉由實際案例深究「討好型人格 (People-pleasing)」，探討個體為獲取認可而過度忽視自我的心理機制。此研究助於未來在分析國際關係與跨文化交流時，具備更深刻的同理心與洞察力。</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">#心理分析</span><span class="skill-tag">#自我覺察</span><span class="skill-tag">#同理心</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 專案 4 -->
-            <div class="portfolio-item">
-                <div class="photo-thumb">
-                    <i class="fas fa-map-marked-alt"></i><span>放置：參賽證明</span>
-                </div>
-                <div class="portfolio-content">
-                    <div class="portfolio-header">
-                        <h3>鹿港沉浮記：地質公園讀景比賽</h3>
-                        <span class="category">Geography</span>
-                    </div>
-                    <p>獨立完成小論文並榮獲<span class="highlight-text">第四屆臺灣地質公園學會參賽證明</span>。透過嚴謹文獻回顧與實察，深度探討鹿港歷史變遷與地理的交互影響，為未來探索東亞政經發展奠定基礎。</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">#地理實察</span><span class="skill-tag">#文獻研究</span><span class="skill-tag">#歷史變遷</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 專案 5 -->
-            <div class="portfolio-item">
-                <div class="photo-thumb">
-                    <i class="fas fa-laptop-code"></i><span>放置：設計圖</span>
-                </div>
-                <div class="portfolio-content">
-                    <div class="portfolio-header">
-                        <h3>生活科技 IEYI專題：智慧筆記本</h3>
-                        <span class="category">Innovation</span>
-                    </div>
-                    <p>為解決課堂筆記痛點，發想結合語音辨識、自動分類與雲端同步的「智慧筆記本」。展現從日常發現問題，並迅速適應科技趨勢、提出具體創新解方的實作能力。</p>
-                    <div class="skill-tags">
-                        <span class="skill-tag">#科技創新</span><span class="skill-tag">#問題解決</span><span class="skill-tag">#團隊協作</span>
-                    </div>
+<!-- Slide 3: Bleed_Image_Right (原外語藝術報告) -->
+<div class="slide-container bleed-image-layout" id="slide3">
+    <div class="content-container">
+        <h2 class="slide-title">外語報告：藝術與文化</h2>
+        <div class="content-area">
+            <div class="text-content">
+                <h3>The Unacceptable Masterpieces</h3>
+                <p>透過全英文專題報告，深入探討歷史上曾受巨大爭議的藝術傑作。</p>
+                <p>研究中，我詳細分析了這些作品在當代如何挑戰既有的社會價值觀與審美標準，藉此反思藝術與社會道德的邊界。此報告不僅展現了我優異的英語學術表達能力，更培養了我具備深度與批判性的藝術文化鑑賞力。</p>
+                <div style="margin-top: 30px;">
+                    <span class="pill-tag">#全英文報告</span>
+                    <span class="pill-tag">#批判性思考</span>
+                    <span class="pill-tag">#藝術鑑賞</span>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+    <div class="image-container">
+        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/7920082786930787751" alt="">
+    </div>
+</div>
 
-    <!-- 申請動機區 -->
-    <section id="motivation">
-        <h2 class="section-title">申請動機與未來展望</h2>
-        <div class="motivation-grid">
-            <div class="motivation-box">
-                <p>我具備 <strong>全民英檢中高級</strong> 的語文實力，且透過涵蓋文學、公衛、心理、地理與科技等多面向專題，培養了跨領域的批判思考。這些經驗使我能以更宏觀的態度理解世界。</p>
-                <p>我特別渴望進入貴系，因為 <strong>「國際關係概論」</strong> 等課程能放大我的「理念」特質。大學前兩年，我計畫深究東亞文化市場並精進第二外語。</p>
+<!-- Slide 4: Section_Title -->
+<div class="slide-container" id="slide4">
+    <div class="section-title-layout">
+        <h2>Social Sciences & Culture</h2>
+        <p>社會科學與文化研究</p>
+    </div>
+</div>
+
+<!-- Slide 5: Two_Column_Tiled_Text -->
+<div class="slide-container" id="slide5">
+    <h2 class="slide-title">社會公衛與心理學探討</h2>
+    <div class="content-area">
+        <div class="two-column tiled">
+            <div>
+                <h3>孤獨危機探討 (Loneliness)</h3>
+                <p>全英文專題探討現代青少年的「數位悖論」，發現孤獨已不僅是情緒，更是全球公衛危機，其危害甚至等同每天抽15根菸。</p>
+                <p>呼應我的「理念」特質，我主動負責研究國外解決方案（如英國設立的孤獨大臣），並嘗試為國內現況提出具體對策，展現對國際新興社會議題的敏銳度與深厚的人文關懷。</p>
+                <div style="margin-top: 20px;">
+                    <span class="pill-tag">#公共衛生</span>
+                    <span class="pill-tag">#社會關懷</span>
+                </div>
             </div>
-            <div class="motivation-box">
-                <p>在大學後兩年，我期盼能藉由 <strong>交換學生計畫</strong>，鍛鍊跨國移動能力並開拓實地考察視野。</p>
-                <p>展望未來，我期待以扎實的外語與分析能力為基石，結合對社會的深厚關懷，在國際關係與跨文化交流領域，貢獻一己之力。</p>
+            <div>
+                <h3>心理與法律：認識討好型人格</h3>
+                <p>藉由實際案例，我深入研究了「討好型人格 (People-pleasing)」。探討個體如何為了獲取社會認可，而過度將他人需求置於自身之上，最終導致自我忽視與心理創傷的機制。</p>
+                <p>這份選修報告展現了我的內省能力與對人類心理動機的好奇。理解深層心理，將有助於未來在分析跨文化交流時，具備更深刻的同理心。</p>
+                <div style="margin-top: 20px;">
+                    <span class="pill-tag">#心理分析</span>
+                    <span class="pill-tag">#自我覺察</span>
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <footer>
-        <p>&copy; 2026 Xuan-Lin Zhao. Personal Application.</p>
-    </footer>
+<!-- Slide 6: Image_Right_Text_Left -->
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">日韓文化差異探討</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="text-content">
+                <h3>自主學習：劇觀文化</h3>
+                <p>透過自主學習計畫，我由影視作品切入，探討日韓兩國的文化差異，並以具代表性的「日式飯糰」與「韓式飯捲」作為具體案例分析。</p>
+                <p>透過飲食文化與大眾影視傳播的雙重視角，我剖析了兩國在社會結構、群體意識與歷史脈絡下的文化異同。此研究充分展現了我對東亞文化的強烈好奇心、敏銳的文化觀察力以及獨立自主的研究精神。</p>
+                <div style="margin-top: 30px;">
+                    <span class="pill-tag">#文化研究</span>
+                    <span class="pill-tag">#自主學習</span>
+                    <span class="pill-tag">#影視分析</span>
+                </div>
+            </div>
+            <div>
+                <div class="image-wrapper">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/13439190904487674539" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        // 平滑滾動
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
+<!-- Slide 7: Section_Title -->
+<div class="slide-container" id="slide7">
+    <div class="section-title-layout">
+        <h2>Innovation & Extracurricular</h2>
+        <p>科技創新與課外實踐</p>
+    </div>
+</div>
+
+<!-- Slide 8: Tiled_Images -->
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">跨領域實踐與團隊合作</h2>
+    <div class="content-area">
+        <div class="tiled-content">
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/1489054605852418154" alt="[Image of 筆記本]">
+                </div>
+                <h3>政大廣告營報告</h3>
+                <p>於高壓營隊中展現極佳的「適應力」，與陌生的團隊迅速磨合，主導並完成商品推廣企劃，最終奪得總體第二名與同品項冠軍的佳績。</p>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/12497489726553513129" alt="[Image of 麥克風]">
+                </div>
+                <h3>步步高聲配音經驗</h3>
+                <p>積極參與配音實作，精進聲音表情與口語表達技巧。展現出色的溝通感染力，以及勇於跨出舒適圈、進行跨領域嘗試的積極態度。</p>
+            </div>
+            <div class="image-tile">
+                <div class="image-wrapper">
+                    <img src="http://googleusercontent.com/image_collection/image_retrieval/15382593802454068563" alt="">
+                </div>
+                <h3>IEYI 智慧筆記本專題</h3>
+                <p>為解決課堂筆記痛點，發想結合語音辨識與雲端同步的科技產品。展現從日常痛點出發，並迅速適應科技趨勢提出創新解方的實作能力。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Slide 9: Q&A -->
+<div class="slide-container" id="slide9">
+    <div class="qa-layout">
+        <h2 class="serif-text">Thank You</h2>
+        <p>趙萱霖 個人申請履歷</p>
+    </div>
+</div>
+
 </body>
 </html>
