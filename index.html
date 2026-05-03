@@ -13,15 +13,15 @@
 
 * {
   box-sizing: border-box;
-  scroll-behavior: smooth; /* Smooth scrolling for navigation */
+  scroll-behavior: smooth; 
 }
 
 :root {
-  --bg-color: #F9F6F0; /* Pale warm cream (Japandi background) */
-  --text-primary: #3E2F21; /* Deep Coffee */
-  --text-secondary: #6B5A4B; /* Muted brown */
-  --accent-color: #8B6D53; /* Taupe/Coffee */
-  --border-color: #D8C3A5; /* Pale Beige */
+  --bg-color: #F9F6F0; 
+  --text-primary: #3E2F21; 
+  --text-secondary: #6B5A4B; 
+  --accent-color: #8B6D53; 
+  --border-color: #D8C3A5; 
 }
 
 body {
@@ -140,7 +140,7 @@ section {
   text-align: center;
 }
 
-/* 2. CONSISTENT TYPOGRAPHY (Magazine Editorial) */
+/* 2. CONSISTENT TYPOGRAPHY */
 h1, h2, h3, .serif-text {
   font-family: 'Noto Serif TC', serif;
   margin: 0;
@@ -214,7 +214,6 @@ p, li, .subtitle {
   padding: 30px 40px;
   background-color: rgba(255,255,255,0.7);
   box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-  /* Hover Float Effect */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   cursor: default;
 }
@@ -227,7 +226,7 @@ p, li, .subtitle {
 .ace-box h2 { font-size: 42px; color: var(--accent-color); margin-bottom: 10px; }
 .ace-box p { font-size: 18px; margin: 0; font-weight: 500;}
 
-/* Two Column Layout (Image Right Text Left) */
+/* Two Column Layout */
 .content-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -257,6 +256,7 @@ p, li, .subtitle {
   margin-bottom: 20px;
   position: relative;
   display: inline-block;
+  line-height: 1.3;
 }
 
 .text-content h3::after {
@@ -282,7 +282,6 @@ p, li, .subtitle {
   padding: 15px;
   background-color: #fff;
   box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-  /* Parallax/Float setup */
   transition: transform 0.5s ease-out;
   overflow: hidden;
 }
@@ -294,17 +293,18 @@ p, li, .subtitle {
   transition: transform 0.8s ease;
 }
 
-/* Hover Zoom inside wrapper (only for images, not iframes) */
 .content-row:hover .image-wrapper img {
   transform: scale(1.05);
 }
 
-/* Tiled Layout for Extracurricular */
+/* Tiled Layout for Extracurricular (2 Columns) */
 .tiled-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 40px;
   opacity: 0;
+  max-width: 1000px; 
+  margin: 0 auto; 
   transform: translateY(30px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
@@ -328,7 +328,7 @@ p, li, .subtitle {
 }
 
 .tile-item .image-wrapper {
-  height: 220px;
+  height: 280px;
   margin-bottom: 25px;
   padding: 0;
   border: none;
@@ -352,7 +352,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
 @media (max-width: 992px) {
   .content-row, .content-row.reverse { grid-template-columns: 1fr; gap: 40px;}
   .content-row.reverse .image-wrapper { order: -1; } 
-  .tiled-grid { grid-template-columns: 1fr 1fr; }
+  .tiled-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -361,7 +361,6 @@ footer p { font-size: 16px; letter-spacing: 2px;}
   section { padding: 80px 5%; }
   #hero h1 { font-size: 48px; }
   .ace-container { gap: 20px; }
-  .tiled-grid { grid-template-columns: 1fr; }
 }
     </style>
 </head>
@@ -414,7 +413,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         <p class="section-subtitle">外語能力與跨文化探討</p>
     </div>
 
-    <!-- 藝術與文化 (嵌入 Canva 簡報) -->
+    <!-- 藝術與文化 -->
     <div class="content-row fade-in-section">
         <div class="text-content">
             <h3>外語報告：藝術與文化</h3>
@@ -431,7 +430,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         </div>
     </div>
     
-    <!-- Culture (嵌入 Canva 簡報) -->
+    <!-- Culture -->
     <div class="content-row reverse fade-in-section">
          <div class="image-wrapper parallax-element">
              <iframe src="https://canva.link/e8p6op381htl4s4" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
@@ -468,14 +467,14 @@ footer p { font-size: 16px; letter-spacing: 2px;}
             </div>
         </div>
         <div class="image-wrapper parallax-element">
-             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; flex-direction:column;"><i class="fas fa-users fa-4x"></i><br><span style="margin-top:15px;">[請替換為孤獨危機報告照片]</span></div>
+             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; flex-direction:column;"><i class="fas fa-users fa-4x"></i><br><span style="margin-top:15px;"></span></div>
         </div>
     </div>
 
     <!-- Row 2: People Pleasing -->
     <div class="content-row reverse fade-in-section">
          <div class="image-wrapper parallax-element">
-             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; text-align:center; flex-direction:column;"><i class="fas fa-brain fa-4x"></i><br><span style="margin-top:15px;">[請替換為心理學報告照片]</span></div>
+             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; text-align:center; flex-direction:column;"><i class="fas fa-brain fa-4x"></i><br><span style="margin-top:15px;"></span></div>
         </div>
         <div class="text-content">
             <h3>心理與法律：認識討好型人格</h3>
@@ -485,6 +484,23 @@ footer p { font-size: 16px; letter-spacing: 2px;}
                 <span class="pill-tag">#心理分析</span>
                 <span class="pill-tag">#自我覺察</span>
             </div>
+        </div>
+    </div>
+
+    <!-- Row 3: Muslim in Taipei (小論文) -->
+    <div class="content-row fade-in-section">
+        <div class="text-content">
+            <h3>社會探究：穆斯林在臺北生活的便利性</h3>
+            <p>以臺北市為例，透過文獻探討與實地考察，檢視現有都市公共設施（如清真飲食認證、祈禱室空間配置）對穆斯林社群的便利性與文化包容度。</p>
+            <p>藉由設計問卷與進行深度訪談，我深刻體會到少數族群在主流文化中所面臨的困境與無形刻板印象。這份小論文不僅為我奠定了社會科學研究的基礎，更大幅提升了我對多元文化的同理心與換位思考能力。</p>
+            <div style="margin-top: 20px;">
+                <span class="pill-tag">#社會探究</span>
+                <span class="pill-tag">#多元包容</span>
+                <span class="pill-tag">#質性訪談</span>
+            </div>
+        </div>
+        <div class="image-wrapper parallax-element">
+             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; flex-direction:column;"><i class="fas fa-mosque fa-4x"></i><br><span style="margin-top:15px;"></span></div>
         </div>
     </div>
 </section>
@@ -497,7 +513,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
     </div>
 
     <div class="tiled-grid fade-in-section">
-        <!-- 廣告營 (嵌入 Canva) -->
+        <!-- 廣告營 -->
         <div class="tile-item">
             <div class="image-wrapper">
                 <iframe src="https://canva.link/8povy6cfz8pfai4" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
@@ -506,22 +522,13 @@ footer p { font-size: 16px; letter-spacing: 2px;}
             <p>於高壓營隊中展現極佳的「適應力」，與陌生的團隊迅速磨合，主導並完成商品推廣企劃，最終奪得總體第二名與同品項冠軍的佳績。</p>
         </div>
         
-        <!-- 配音 (嵌入 Canva) -->
+        <!-- 配音 -->
         <div class="tile-item">
             <div class="image-wrapper">
                 <iframe src="https://canva.link/cfttpsf0wc1ic6u" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
             </div>
             <h3>步步高聲配音經驗</h3>
             <p>積極參與配音實作，精進聲音表情與口語表達技巧。展現出色的溝通感染力，以及勇於跨出舒適圈、進行跨領域嘗試的積極態度。</p>
-        </div>
-        
-        <!-- 智慧筆記本 (保留圖片佔位符，因為沒有提供 Canva 連結) -->
-        <div class="tile-item">
-            <div class="image-wrapper">
-                 <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; text-align:center; flex-direction:column;"><i class="fas fa-laptop-code fa-3x"></i><br><span style="margin-top:10px; font-size:12px;">[請替換為專題照片]</span></div>
-            </div>
-            <h3>IEYI 智慧筆記本專題</h3>
-            <p>為解決課堂筆記痛點，發想結合語音辨識與雲端同步的科技產品。展現從日常痛點出發，並迅速適應科技趨勢提出創新解方的實作能力。</p>
         </div>
     </div>
 </section>
@@ -534,13 +541,11 @@ footer p { font-size: 16px; letter-spacing: 2px;}
 <script>
     // 1. 閱讀進度條 & 導覽列動態效果
     window.onscroll = function() {
-        // Progress Bar
         let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
         let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         let scrolled = (winScroll / height) * 100;
         document.getElementById("progress-bar").style.width = scrolled + "%";
 
-        // Navbar blur and shrink
         let navbar = document.getElementById("navbar");
         if (winScroll > 50) {
             navbar.classList.add("scrolled");
@@ -549,7 +554,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         }
     };
 
-    // 2. 滾動顯示動畫 (Intersection Observer)
+    // 2. 滾動顯示動畫
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -568,7 +573,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         observer.observe(section);
     });
 
-    // 3. 滑鼠觸碰 3D 視差微動效果 (Parallax Hover)
+    // 3. 滑鼠觸碰 3D 視差微動效果
     if (window.innerWidth > 768) {
         const parallaxElements = document.querySelectorAll('.parallax-element');
         
@@ -595,4 +600,4 @@ footer p { font-size: 16px; letter-spacing: 2px;}
 </script>
 
 </body>
-</html>>
+</html>
