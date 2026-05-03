@@ -13,6 +13,7 @@
 
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth; /* Smooth scrolling for navigation */
 }
 
 :root {
@@ -24,102 +25,135 @@
 }
 
 body {
-  background-color: #e2e8f0;
-  display: grid;
-  gap: 30px;
-  grid-template-columns: 1fr;
+  background-color: var(--bg-color);
   margin: 0;
-  min-height: 100vh;
-  padding: 30px 0;
-  place-items: center;
+  padding: 0;
+  font-family: 'Noto Sans TC', sans-serif;
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-.slide-container {
+/* 閱讀進度條 */
+#progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--border-color), var(--text-primary));
+  width: 0%;
+  z-index: 1001;
+  transition: width 0.1s ease-out;
+}
+
+/* 導覽列 */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(249, 246, 240, 0.9);
+  padding: 20px 50px;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  background-color: var(--bg-color);
-  border-radius: 4px;
-  box-shadow: 0 15px 35px rgba(62, 47, 33, 0.08);
+  z-index: 1000;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(5px);
+  border-bottom: 1px solid transparent;
+}
+
+nav.scrolled {
+  padding: 10px 50px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+  border-bottom: 1px solid var(--border-color);
+}
+
+nav .logo {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-family: 'Noto Serif TC', serif;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: var(--text-primary);
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: var(--text-primary);
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+/* 區塊共用設定 */
+section {
+  padding: 100px 10%;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: 'Noto Sans TC', sans-serif;
-  height: 720px;
   justify-content: center;
-  overflow: hidden;
-  padding: 60px 80px;
-  position: relative;
-  width: 1280px;
-  -webkit-font-smoothing: antialiased;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+  font-family: 'Noto Serif TC', serif;
+  font-size: 42px;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: var(--accent-color);
+  text-align: center;
+}
+
+.section-subtitle {
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: var(--text-secondary);
+  margin-bottom: 60px;
+  text-align: center;
 }
 
 /* 2. CONSISTENT TYPOGRAPHY (Magazine Editorial) */
-
-.slide-container h1,
-.slide-container h2,
-.slide-container h3,
-.slide-container .serif-text {
-  color: var(--text-primary);
-  font-weight: 600;
+h1, h2, h3, .serif-text {
   font-family: 'Noto Serif TC', serif;
   margin: 0;
   letter-spacing: 1.5px;
 }
 
-.slide-container p,
-.slide-container li,
-.slide-container .subtitle {
-  color: var(--text-secondary);
+p, li, .subtitle {
   font-family: 'Noto Sans TC', sans-serif;
   line-height: 1.8;
   font-weight: 300;
 }
 
-.slide-container h1 {
-  font-size: 64px;
-  letter-spacing: 4px;
-}
-
-.slide-container .slide-title {
-  font-size: 38px;
-  font-weight: 600;
-  margin-bottom: 40px;
-  text-align: left;
-  width: 100%;
-  position: relative;
-}
-
-.slide-container .slide-title::after {
-  content: '';
-  display: block;
-  width: 40px;
-  height: 2px;
-  background-color: var(--accent-color);
-  margin-top: 15px;
-}
-
-.slide-container h3 {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 15px;
-  line-height: 1.4;
-}
-
-.slide-container p,
-.slide-container li {
-  font-size: 18px;
-  margin-bottom: 15px;
-}
-
-.slide-container .content-area {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  justify-content: center;
-  width: 100%;
-}
-
 /* 3. JAPANDI SPECIFIC UI ELEMENTS */
-
 .pill-tag {
   display: inline-block;
   background-color: transparent;
@@ -131,6 +165,12 @@ body {
   letter-spacing: 1px;
   margin-right: 10px;
   margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.pill-tag:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
 }
 
 .highlight-text {
@@ -139,331 +179,418 @@ body {
   border-bottom: 2px solid var(--border-color);
 }
 
-.image-wrapper {
-  border: 1px solid var(--border-color);
-  height: 400px;
-  width: 100%;
-  overflow: hidden;
-  padding: 10px;
-  background-color: #fff;
-}
-
-.image-wrapper img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-}
-
 /* 4. LAYOUT DEFINITIONS */
 
-/* Title Slide */
-.title-layout {
+/* Title Section */
+#hero {
   text-align: center;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-color) 100%);
 }
 
-.title-layout h1 { margin-bottom: 15px; }
-.title-layout .subtitle { font-size: 20px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 50px;}
+#hero h1 { 
+  font-size: 72px; 
+  letter-spacing: 6px; 
+  margin-bottom: 20px; 
+}
+#hero .subtitle { 
+  font-size: 22px; 
+  letter-spacing: 3px; 
+  text-transform: uppercase; 
+  margin-bottom: 60px;
+}
 
 .ace-container {
   display: flex;
-  gap: 30px;
-  margin-bottom: 40px;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
 }
 
 .ace-box {
   text-align: center;
   border: 1px solid var(--border-color);
-  padding: 20px 30px;
-  background-color: rgba(255,255,255,0.5);
+  padding: 30px 40px;
+  background-color: rgba(255,255,255,0.7);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  /* Hover Float Effect */
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: default;
 }
 
-.ace-box h2 { font-size: 32px; color: var(--accent-color); margin-bottom: 5px; }
-.ace-box p { font-size: 16px; margin: 0; color: var(--text-primary); font-weight: 500;}
-
-/* Section Title Layout */
-.section-title-layout {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  border: 1px solid var(--border-color);
-  background-color: rgba(255,255,255,0.4);
+.ace-box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(62, 47, 33, 0.1);
 }
 
-.section-title-layout h2 {
-  font-size: 52px;
-  margin-bottom: 20px;
-  color: var(--accent-color);
-}
+.ace-box h2 { font-size: 42px; color: var(--accent-color); margin-bottom: 10px; }
+.ace-box p { font-size: 18px; margin: 0; font-weight: 500;}
 
-.section-title-layout p { font-size: 22px; letter-spacing: 3px;}
-
-/* Two Column Image Right Text Left */
-.two-column {
-  align-items: center;
+/* Two Column Layout (Image Right Text Left) */
+.content-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 60px;
+  align-items: center;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.content-row.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.content-row.reverse {
+  grid-template-columns: 1fr 1fr; /* Image Left, Text Right visually, handled in HTML order */
+}
+
+.text-content {
+  padding: 0 20px;
+}
+
+.text-content h3 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.text-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background-color: var(--accent-color);
+}
+
+.text-content p {
+  font-size: 17px;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+.image-wrapper {
+  border: 1px solid var(--border-color);
+  height: 450px;
   width: 100%;
-}
-
-.two-column .text-content { padding-right: 20px; }
-.two-column .image-wrapper img { object-fit: contain; background-color: var(--bg-color); }
-
-/* Bleed Image Right */
-.slide-container.bleed-image-layout {
-  align-items: start;
-  display: grid;
-  gap: 0;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  padding: 0;
-}
-
-.slide-container.bleed-image-layout > .content-container {
-  padding: 80px 60px 80px 80px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: 100%;
-}
-
-.slide-container.bleed-image-layout > .image-container {
-  height: 100%;
+  padding: 15px;
+  background-color: #fff;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  /* Parallax/Float setup */
+  transition: transform 0.5s ease-out;
   overflow: hidden;
-  width: 100%;
 }
 
-.slide-container.bleed-image-layout img.bleed-image-side {
-  display: block;
-  height: 720px;
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  object-position: center;
-  width: 100%;
+  transition: transform 0.8s ease;
 }
 
-/* Two Column Tiled Text */
-.two-column.tiled {
-  align-items: stretch;
+/* Hover Zoom inside wrapper */
+.content-row:hover .image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* Tiled Layout for Extracurricular */
+.tiled-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-.two-column.tiled > div {
+.tiled-grid.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tile-item {
   background-color: rgba(255,255,255,0.6);
   border: 1px solid var(--border-color);
-  padding: 50px 40px;
+  padding: 30px;
   text-align: left;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
-.two-column.tiled h3 { color: var(--accent-color); }
-
-/* Tiled Images */
-.tiled-content {
-  align-items: stretch;
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  width: 100%;
+.tile-item:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(62, 47, 33, 0.08);
 }
 
-.image-tile {
-  flex: 1;
-  text-align: left;
-}
-
-.image-tile .image-wrapper {
-  height: 200px;
+.tile-item .image-wrapper {
+  height: 220px;
   margin-bottom: 25px;
-  border: none;
   padding: 0;
+  border: none;
+  box-shadow: none;
 }
 
-.image-tile h3 { font-size: 20px; margin-bottom: 10px;}
-.image-tile p { font-size: 15px; line-height: 1.6;}
+.tile-item h3 { font-size: 22px; margin-bottom: 15px;}
+.tile-item p { font-size: 15px; }
 
-/* Q&A Layout */
-.qa-layout {
-  margin: 0 auto;
+/* Footer */
+footer {
   text-align: center;
-  width: 100%;
-  align-self: center;
+  padding: 60px 20px;
+  background-color: var(--bg-color);
 }
 
-.qa-layout h2 { font-size: 72px; margin-bottom: 20px; letter-spacing: 5px;}
-.qa-layout p { font-size: 20px; letter-spacing: 2px;}
+footer h2 { font-size: 48px; margin-bottom: 10px; letter-spacing: 5px;}
+footer p { font-size: 16px; letter-spacing: 2px;}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .content-row, .content-row.reverse { grid-template-columns: 1fr; gap: 40px;}
+  .content-row.reverse .image-wrapper { order: -1; } /* Image always on top on mobile */
+  .tiled-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  nav { padding: 15px 20px; flex-direction: column; gap: 10px; }
+  nav ul { gap: 15px; }
+  section { padding: 80px 5%; }
+  #hero h1 { font-size: 48px; }
+  .ace-container { gap: 20px; }
+  .tiled-grid { grid-template-columns: 1fr; }
+}
     </style>
 </head>
 <body>
 
-<!-- Slide 1: Title_Slide -->
-<div class="slide-container" id="slide1">
-    <div class="title-layout">
-        <h1>趙萱霖</h1>
-        <p class="subtitle serif-text">Personal Application Portfolio</p>
+<!-- 頂部閱讀進度條 -->
+<div id="progress-bar"></div>
+
+<!-- 導覽列 -->
+<nav id="navbar">
+    <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">趙萱霖</div>
+    <ul>
+        <li><a href="#hero">關於我</a></li>
+        <li><a href="#language">外語與文學</a></li>
+        <li><a href="#social">社會與文化</a></li>
+        <li><a href="#innovation">科技與實踐</a></li>
+    </ul>
+</nav>
+
+<!-- Section 1: Hero / Title -->
+<section id="hero">
+    <h1>趙萱霖</h1>
+    <p class="subtitle serif-text">Personal Application Portfolio</p>
+    
+    <div class="ace-container">
+        <div class="ace-box floating-element">
+            <h2>A</h2>
+            <p>適應 Adaptability</p>
+        </div>
+        <div class="ace-box floating-element" style="animation-delay: 0.2s;">
+            <h2>C</h2>
+            <p>審慎 Prudence</p>
+        </div>
+        <div class="ace-box floating-element" style="animation-delay: 0.4s;">
+            <h2>E</h2>
+            <p>理念 Ideals</p>
+        </div>
+    </div>
+
+    <div>
+        <span class="pill-tag" style="background-color: var(--text-primary); color: #fff; border:none;"><i class="fas fa-award"></i> 全民英檢中高級 初試通過</span>
+        <span class="pill-tag" style="background-color: var(--text-primary); color: #fff; border:none;"><i class="fas fa-certificate"></i> 多益 (TOEIC) 720分</span>
+    </div>
+</section>
+
+<!-- Section 2: Language & Literature -->
+<section id="language">
+    <div>
+        <h2 class="section-title">Language & Literature</h2>
+        <p class="section-subtitle">語言能力與文學探討</p>
+    </div>
+
+    <div class="content-row fade-in-section">
+        <div class="text-content">
+            <h3>外語報告：藝術與文化</h3>
+            <p>透過全英文專題報告《The Unacceptable Masterpieces》，深入探討歷史上曾受巨大爭議的藝術傑作。</p>
+            <p>研究中，我詳細分析了這些作品在當代如何挑戰既有的社會價值觀與審美標準，藉此反思藝術與社會道德的邊界。此報告不僅展現了我優異的英語學術表達能力，更培養了我具備深度與批判性的藝術文化鑑賞力。</p>
+            <div style="margin-top: 30px;">
+                <span class="pill-tag">#全英文報告</span>
+                <span class="pill-tag">#批判性思考</span>
+                <span class="pill-tag">#藝術鑑賞</span>
+            </div>
+        </div>
+        <div class="image-wrapper parallax-element">
+            <img src="http://googleusercontent.com/image_collection/image_retrieval/7920082786930787751" alt="">
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Social Sciences & Culture -->
+<section id="social" style="background-color: #FDFBFC;"> <!-- Subtle background change to separate sections -->
+    <div>
+        <h2 class="section-title">Social Sciences & Culture</h2>
+        <p class="section-subtitle">社會科學與文化研究</p>
+    </div>
+
+    <!-- Row 1: Loneliness -->
+    <div class="content-row reverse fade-in-section">
+        <div class="image-wrapper parallax-element">
+             <img src="http://googleusercontent.com/image_collection/image_retrieval/13439190904487674539" alt=""> <!-- Placeholder, maybe generic discussion image is better, but keeping existing images -->
+        </div>
+        <div class="text-content">
+            <h3>孤獨危機探討 (Loneliness)</h3>
+            <p>全英文專題探討現代青少年的「數位悖論」，發現孤獨已不僅是情緒，更是全球公衛危機，其危害甚至等同每天抽15根菸。</p>
+            <p>呼應我的「理念」特質，我主動負責研究國外解決方案（如英國設立的孤獨大臣），並嘗試為國內現況提出具體對策，展現對國際新興社會議題的敏銳度與深厚的人文關懷。</p>
+            <div style="margin-top: 20px;">
+                <span class="pill-tag">#公共衛生</span>
+                <span class="pill-tag">#社會關懷</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Row 2: People Pleasing -->
+    <div class="content-row fade-in-section">
+        <div class="text-content">
+            <h3>心理與法律：認識討好型人格</h3>
+            <p>藉由實際案例，我深入研究了「討好型人格 (People-pleasing)」。探討個體如何為了獲取社會認可，而過度將他人需求置於自身之上，最終導致自我忽視與心理創傷的機制。</p>
+            <p>這份選修報告展現了我的內省能力與對人類心理動機的好奇。理解深層心理，將有助於未來在分析跨文化交流時，具備更深刻的同理心。</p>
+            <div style="margin-top: 20px;">
+                <span class="pill-tag">#心理分析</span>
+                <span class="pill-tag">#自我覺察</span>
+            </div>
+        </div>
+         <div class="image-wrapper parallax-element">
+             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999;"><i class="fas fa-brain fa-4x"></i></div> <!-- Fallback icon if no specific image -->
+        </div>
+    </div>
+
+    <!-- Row 3: Culture -->
+    <div class="content-row reverse fade-in-section">
+         <div class="image-wrapper parallax-element">
+             <img src="http://googleusercontent.com/image_collection/image_retrieval/13439190904487674539" alt="">
+        </div>
+        <div class="text-content">
+            <h3>日韓文化差異探討：劇觀文化</h3>
+            <p>透過自主學習計畫，我由影視作品切入，探討日韓兩國的文化差異，並以具代表性的「日式飯糰」與「韓式飯捲」作為具體案例分析。</p>
+            <p>透過飲食文化與大眾影視傳播的雙重視角，我剖析了兩國在社會結構、群體意識與歷史脈絡下的文化異同。此研究充分展現了我對東亞文化的強烈好奇心、敏銳的文化觀察力以及獨立自主的研究精神。</p>
+            <div style="margin-top: 30px;">
+                <span class="pill-tag">#文化研究</span>
+                <span class="pill-tag">#自主學習</span>
+                <span class="pill-tag">#影視分析</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 4: Innovation & Extracurricular -->
+<section id="innovation">
+    <div>
+        <h2 class="section-title">Innovation & Extracurricular</h2>
+        <p class="section-subtitle">科技創新與跨領域實踐</p>
+    </div>
+
+    <div class="tiled-grid fade-in-section">
+        <div class="tile-item">
+            <div class="image-wrapper">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/1489054605852418154" alt="[Image of 筆記本]">
+            </div>
+            <h3>政大廣告營報告</h3>
+            <p>於高壓營隊中展現極佳的「適應力」，與陌生的團隊迅速磨合，主導並完成商品推廣企劃，最終奪得總體第二名與同品項冠軍的佳績。</p>
+        </div>
+        <div class="tile-item">
+            <div class="image-wrapper">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/12497489726553513129" alt="[Image of 麥克風]">
+            </div>
+            <h3>步步高聲配音經驗</h3>
+            <p>積極參與配音實作，精進聲音表情與口語表達技巧。展現出色的溝通感染力，以及勇於跨出舒適圈、進行跨領域嘗試的積極態度。</p>
+        </div>
+        <div class="tile-item">
+            <div class="image-wrapper">
+                <img src="http://googleusercontent.com/image_collection/image_retrieval/15382593802454068563" alt="">
+            </div>
+            <h3>IEYI 智慧筆記本專題</h3>
+            <p>為解決課堂筆記痛點，發想結合語音辨識與雲端同步的科技產品。展現從日常痛點出發，並迅速適應科技趨勢提出創新解方的實作能力。</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <h2 class="serif-text">Thank You</h2>
+    <p>趙萱霖 個人申請履歷</p>
+</footer>
+
+<script>
+    // 1. 閱讀進度條 & 導覽列動態效果
+    window.onscroll = function() {
+        // Progress Bar
+        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        let scrolled = (winScroll / height) * 100;
+        document.getElementById("progress-bar").style.width = scrolled + "%";
+
+        // Navbar blur and shrink
+        let navbar = document.getElementById("navbar");
+        if (winScroll > 50) {
+            navbar.classList.add("scrolled");
+        } else {
+            navbar.classList.remove("scrolled");
+        }
+    };
+
+    // 2. 滾動顯示動畫 (Intersection Observer)
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Optional: Stop observing once visible if you only want it to animate once
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in-section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // 3. 滑鼠觸碰 3D 視差微動效果 (Parallax Hover)
+    // 應用於圖片區塊
+    if (window.innerWidth > 768) {
+        const parallaxElements = document.querySelectorAll('.parallax-element');
         
-        <div class="ace-container">
-            <div class="ace-box">
-                <h2>A</h2>
-                <p>適應 Adaptability</p>
-            </div>
-            <div class="ace-box">
-                <h2>C</h2>
-                <p>審慎 Prudence</p>
-            </div>
-            <div class="ace-box">
-                <h2>E</h2>
-                <p>理念 Ideals</p>
-            </div>
-        </div>
+        parallaxElements.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left; 
+                const y = e.clientY - rect.top;  
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // 計算傾斜角度 (極微小的傾斜以保持優雅)
+                const rotateX = ((y - centerY) / centerY) * -2; 
+                const rotateY = ((x - centerX) / centerX) * 2;
+                
+                el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
 
-        <div>
-            <span class="pill-tag" style="background-color: var(--text-primary); color: #fff; border:none;"><i class="fas fa-award"></i> 全民英檢中高級 初試通過</span>
-            <span class="pill-tag" style="background-color: var(--text-primary); color: #fff; border:none;"><i class="fas fa-certificate"></i> 多益 (TOEIC) 720分</span>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 2: Section_Title -->
-<div class="slide-container" id="slide2">
-    <div class="section-title-layout">
-        <h2>Language & Literature</h2>
-        <p>語言能力與文學探討</p>
-    </div>
-</div>
-
-<!-- Slide 3: Bleed_Image_Right (原外語藝術報告) -->
-<div class="slide-container bleed-image-layout" id="slide3">
-    <div class="content-container">
-        <h2 class="slide-title">外語報告：藝術與文化</h2>
-        <div class="content-area">
-            <div class="text-content">
-                <h3>The Unacceptable Masterpieces</h3>
-                <p>透過全英文專題報告，深入探討歷史上曾受巨大爭議的藝術傑作。</p>
-                <p>研究中，我詳細分析了這些作品在當代如何挑戰既有的社會價值觀與審美標準，藉此反思藝術與社會道德的邊界。此報告不僅展現了我優異的英語學術表達能力，更培養了我具備深度與批判性的藝術文化鑑賞力。</p>
-                <div style="margin-top: 30px;">
-                    <span class="pill-tag">#全英文報告</span>
-                    <span class="pill-tag">#批判性思考</span>
-                    <span class="pill-tag">#藝術鑑賞</span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="image-container">
-        <img class="bleed-image-side" src="http://googleusercontent.com/image_collection/image_retrieval/7920082786930787751" alt="">
-    </div>
-</div>
-
-<!-- Slide 4: Section_Title -->
-<div class="slide-container" id="slide4">
-    <div class="section-title-layout">
-        <h2>Social Sciences & Culture</h2>
-        <p>社會科學與文化研究</p>
-    </div>
-</div>
-
-<!-- Slide 5: Two_Column_Tiled_Text -->
-<div class="slide-container" id="slide5">
-    <h2 class="slide-title">社會公衛與心理學探討</h2>
-    <div class="content-area">
-        <div class="two-column tiled">
-            <div>
-                <h3>孤獨危機探討 (Loneliness)</h3>
-                <p>全英文專題探討現代青少年的「數位悖論」，發現孤獨已不僅是情緒，更是全球公衛危機，其危害甚至等同每天抽15根菸。</p>
-                <p>呼應我的「理念」特質，我主動負責研究國外解決方案（如英國設立的孤獨大臣），並嘗試為國內現況提出具體對策，展現對國際新興社會議題的敏銳度與深厚的人文關懷。</p>
-                <div style="margin-top: 20px;">
-                    <span class="pill-tag">#公共衛生</span>
-                    <span class="pill-tag">#社會關懷</span>
-                </div>
-            </div>
-            <div>
-                <h3>心理與法律：認識討好型人格</h3>
-                <p>藉由實際案例，我深入研究了「討好型人格 (People-pleasing)」。探討個體如何為了獲取社會認可，而過度將他人需求置於自身之上，最終導致自我忽視與心理創傷的機制。</p>
-                <p>這份選修報告展現了我的內省能力與對人類心理動機的好奇。理解深層心理，將有助於未來在分析跨文化交流時，具備更深刻的同理心。</p>
-                <div style="margin-top: 20px;">
-                    <span class="pill-tag">#心理分析</span>
-                    <span class="pill-tag">#自我覺察</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 6: Image_Right_Text_Left -->
-<div class="slide-container" id="slide6">
-    <h2 class="slide-title">日韓文化差異探討</h2>
-    <div class="content-area">
-        <div class="two-column">
-            <div class="text-content">
-                <h3>自主學習：劇觀文化</h3>
-                <p>透過自主學習計畫，我由影視作品切入，探討日韓兩國的文化差異，並以具代表性的「日式飯糰」與「韓式飯捲」作為具體案例分析。</p>
-                <p>透過飲食文化與大眾影視傳播的雙重視角，我剖析了兩國在社會結構、群體意識與歷史脈絡下的文化異同。此研究充分展現了我對東亞文化的強烈好奇心、敏銳的文化觀察力以及獨立自主的研究精神。</p>
-                <div style="margin-top: 30px;">
-                    <span class="pill-tag">#文化研究</span>
-                    <span class="pill-tag">#自主學習</span>
-                    <span class="pill-tag">#影視分析</span>
-                </div>
-            </div>
-            <div>
-                <div class="image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/13439190904487674539" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 7: Section_Title -->
-<div class="slide-container" id="slide7">
-    <div class="section-title-layout">
-        <h2>Innovation & Extracurricular</h2>
-        <p>科技創新與課外實踐</p>
-    </div>
-</div>
-
-<!-- Slide 8: Tiled_Images -->
-<div class="slide-container" id="slide8">
-    <h2 class="slide-title">跨領域實踐與團隊合作</h2>
-    <div class="content-area">
-        <div class="tiled-content">
-            <div class="image-tile">
-                <div class="image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/1489054605852418154" alt="[Image of 筆記本]">
-                </div>
-                <h3>政大廣告營報告</h3>
-                <p>於高壓營隊中展現極佳的「適應力」，與陌生的團隊迅速磨合，主導並完成商品推廣企劃，最終奪得總體第二名與同品項冠軍的佳績。</p>
-            </div>
-            <div class="image-tile">
-                <div class="image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/12497489726553513129" alt="[Image of 麥克風]">
-                </div>
-                <h3>步步高聲配音經驗</h3>
-                <p>積極參與配音實作，精進聲音表情與口語表達技巧。展現出色的溝通感染力，以及勇於跨出舒適圈、進行跨領域嘗試的積極態度。</p>
-            </div>
-            <div class="image-tile">
-                <div class="image-wrapper">
-                    <img src="http://googleusercontent.com/image_collection/image_retrieval/15382593802454068563" alt="">
-                </div>
-                <h3>IEYI 智慧筆記本專題</h3>
-                <p>為解決課堂筆記痛點，發想結合語音辨識與雲端同步的科技產品。展現從日常痛點出發，並迅速適應科技趨勢提出創新解方的實作能力。</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Slide 9: Q&A -->
-<div class="slide-container" id="slide9">
-    <div class="qa-layout">
-        <h2 class="serif-text">Thank You</h2>
-        <p>趙萱霖 個人申請履歷</p>
-    </div>
-</div>
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg)`;
+            });
+        });
+    }
+</script>
 
 </body>
 </html>
