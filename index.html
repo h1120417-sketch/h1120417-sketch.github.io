@@ -245,7 +245,7 @@ p, li, .subtitle {
 }
 
 .content-row.reverse {
-  grid-template-columns: 1fr 1fr; /* Image Left, Text Right visually, handled in HTML order */
+  grid-template-columns: 1fr 1fr; 
 }
 
 .text-content {
@@ -294,7 +294,7 @@ p, li, .subtitle {
   transition: transform 0.8s ease;
 }
 
-/* Hover Zoom inside wrapper */
+/* Hover Zoom inside wrapper (only for images, not iframes) */
 .content-row:hover .image-wrapper img {
   transform: scale(1.05);
 }
@@ -351,7 +351,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .content-row, .content-row.reverse { grid-template-columns: 1fr; gap: 40px;}
-  .content-row.reverse .image-wrapper { order: -1; } /* Image always on top on mobile */
+  .content-row.reverse .image-wrapper { order: -1; } 
   .tiled-grid { grid-template-columns: 1fr 1fr; }
 }
 
@@ -375,8 +375,8 @@ footer p { font-size: 16px; letter-spacing: 2px;}
     <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">趙萱霖</div>
     <ul>
         <li><a href="#hero">關於我</a></li>
-        <li><a href="#language">外語與文學</a></li>
-        <li><a href="#social">社會與文化</a></li>
+        <li><a href="#language">外語與文化</a></li>
+        <li><a href="#social">社會與心理</a></li>
         <li><a href="#innovation">科技與實踐</a></li>
     </ul>
 </nav>
@@ -393,11 +393,11 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         </div>
         <div class="ace-box floating-element" style="animation-delay: 0.2s;">
             <h2>C</h2>
-            <p>審慎 Prudence</p>
+            <p>審慎 Concept</p>
         </div>
         <div class="ace-box floating-element" style="animation-delay: 0.4s;">
             <h2>E</h2>
-            <p>理念 Ideals</p>
+            <p>理念 Elaboration</p>
         </div>
     </div>
 
@@ -407,13 +407,14 @@ footer p { font-size: 16px; letter-spacing: 2px;}
     </div>
 </section>
 
-<!-- Section 2: Language & Literature -->
+<!-- Section 2: Language & Culture -->
 <section id="language">
     <div>
-        <h2 class="section-title">Language & Literature</h2>
-        <p class="section-subtitle">語言能力與文學探討</p>
+        <h2 class="section-title">Language & Culture</h2>
+        <p class="section-subtitle">外語能力與跨文化探討</p>
     </div>
 
+    <!-- 藝術與文化 (嵌入 Canva 簡報) -->
     <div class="content-row fade-in-section">
         <div class="text-content">
             <h3>外語報告：藝術與文化</h3>
@@ -426,54 +427,14 @@ footer p { font-size: 16px; letter-spacing: 2px;}
             </div>
         </div>
         <div class="image-wrapper parallax-element">
-            <img src="http://googleusercontent.com/image_collection/image_retrieval/7920082786930787751" alt="">
+            <iframe src="https://canva.link/vv9t5tfafy16yi0" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
         </div>
     </div>
-</section>
-
-<!-- Section 3: Social Sciences & Culture -->
-<section id="social" style="background-color: #FDFBFC;"> <!-- Subtle background change to separate sections -->
-    <div>
-        <h2 class="section-title">Social Sciences & Culture</h2>
-        <p class="section-subtitle">社會科學與文化研究</p>
-    </div>
-
-    <!-- Row 1: Loneliness -->
-    <div class="content-row reverse fade-in-section">
-        <div class="image-wrapper parallax-element">
-             <img src="http://googleusercontent.com/image_collection/image_retrieval/13439190904487674539" alt=""> <!-- Placeholder, maybe generic discussion image is better, but keeping existing images -->
-        </div>
-        <div class="text-content">
-            <h3>孤獨危機探討 (Loneliness)</h3>
-            <p>全英文專題探討現代青少年的「數位悖論」，發現孤獨已不僅是情緒，更是全球公衛危機，其危害甚至等同每天抽15根菸。</p>
-            <p>呼應我的「理念」特質，我主動負責研究國外解決方案（如英國設立的孤獨大臣），並嘗試為國內現況提出具體對策，展現對國際新興社會議題的敏銳度與深厚的人文關懷。</p>
-            <div style="margin-top: 20px;">
-                <span class="pill-tag">#公共衛生</span>
-                <span class="pill-tag">#社會關懷</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Row 2: People Pleasing -->
-    <div class="content-row fade-in-section">
-        <div class="text-content">
-            <h3>心理與法律：認識討好型人格</h3>
-            <p>藉由實際案例，我深入研究了「討好型人格 (People-pleasing)」。探討個體如何為了獲取社會認可，而過度將他人需求置於自身之上，最終導致自我忽視與心理創傷的機制。</p>
-            <p>這份選修報告展現了我的內省能力與對人類心理動機的好奇。理解深層心理，將有助於未來在分析跨文化交流時，具備更深刻的同理心。</p>
-            <div style="margin-top: 20px;">
-                <span class="pill-tag">#心理分析</span>
-                <span class="pill-tag">#自我覺察</span>
-            </div>
-        </div>
-         <div class="image-wrapper parallax-element">
-             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999;"><i class="fas fa-brain fa-4x"></i></div> <!-- Fallback icon if no specific image -->
-        </div>
-    </div>
-
-    <!-- Row 3: Culture -->
+    
+    <!-- Culture (嵌入 Canva 簡報) -->
     <div class="content-row reverse fade-in-section">
          <div class="image-wrapper parallax-element">
-             <img src="http://googleusercontent.com/image_collection/image_retrieval/13439190904487674539" alt="">
+             <iframe src="https://canva.link/e8p6op381htl4s4" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
         </div>
         <div class="text-content">
             <h3>日韓文化差異探討：劇觀文化</h3>
@@ -488,6 +449,46 @@ footer p { font-size: 16px; letter-spacing: 2px;}
     </div>
 </section>
 
+<!-- Section 3: Social Sciences & Psychology -->
+<section id="social" style="background-color: #FDFBFC;"> 
+    <div>
+        <h2 class="section-title">Social Sciences & Psychology</h2>
+        <p class="section-subtitle">社會公衛與心理學研究</p>
+    </div>
+
+    <!-- Row 1: Loneliness -->
+    <div class="content-row fade-in-section">
+        <div class="text-content">
+            <h3>孤獨危機探討 (Loneliness)</h3>
+            <p>全英文專題探討現代青少年的「數位悖論」，發現孤獨已不僅是情緒，更是全球公衛危機，其危害甚至等同每天抽15根菸。</p>
+            <p>呼應我的「理念」特質，我主動負責研究國外解決方案（如英國設立的孤獨大臣），並嘗試為國內現況提出具體對策，展現對國際新興社會議題的敏銳度與深厚的人文關懷。</p>
+            <div style="margin-top: 20px;">
+                <span class="pill-tag">#公共衛生</span>
+                <span class="pill-tag">#社會關懷</span>
+            </div>
+        </div>
+        <div class="image-wrapper parallax-element">
+             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; flex-direction:column;"><i class="fas fa-users fa-4x"></i><br><span style="margin-top:15px;">[請替換為孤獨危機報告照片]</span></div>
+        </div>
+    </div>
+
+    <!-- Row 2: People Pleasing -->
+    <div class="content-row reverse fade-in-section">
+         <div class="image-wrapper parallax-element">
+             <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; text-align:center; flex-direction:column;"><i class="fas fa-brain fa-4x"></i><br><span style="margin-top:15px;">[請替換為心理學報告照片]</span></div>
+        </div>
+        <div class="text-content">
+            <h3>心理與法律：認識討好型人格</h3>
+            <p>藉由實際案例，我深入研究了「討好型人格 (People-pleasing)」。探討個體如何為了獲取社會認可，而過度將他人需求置於自身之上，最終導致自我忽視與心理創傷的機制。</p>
+            <p>這份選修報告展現了我的內省能力與對人類心理動機的好奇。理解深層心理，將有助於未來在分析跨文化交流時，具備更深刻的同理心。</p>
+            <div style="margin-top: 20px;">
+                <span class="pill-tag">#心理分析</span>
+                <span class="pill-tag">#自我覺察</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Section 4: Innovation & Extracurricular -->
 <section id="innovation">
     <div>
@@ -496,23 +497,28 @@ footer p { font-size: 16px; letter-spacing: 2px;}
     </div>
 
     <div class="tiled-grid fade-in-section">
+        <!-- 廣告營 (嵌入 Canva) -->
         <div class="tile-item">
             <div class="image-wrapper">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/1489054605852418154" alt="[Image of 筆記本]">
+                <iframe src="https://canva.link/8povy6cfz8pfai4" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
             </div>
             <h3>政大廣告營報告</h3>
             <p>於高壓營隊中展現極佳的「適應力」，與陌生的團隊迅速磨合，主導並完成商品推廣企劃，最終奪得總體第二名與同品項冠軍的佳績。</p>
         </div>
+        
+        <!-- 配音 (嵌入 Canva) -->
         <div class="tile-item">
             <div class="image-wrapper">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/12497489726553513129" alt="[Image of 麥克風]">
+                <iframe src="https://canva.link/cfttpsf0wc1ic6u" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
             </div>
             <h3>步步高聲配音經驗</h3>
             <p>積極參與配音實作，精進聲音表情與口語表達技巧。展現出色的溝通感染力，以及勇於跨出舒適圈、進行跨領域嘗試的積極態度。</p>
         </div>
+        
+        <!-- 智慧筆記本 (保留圖片佔位符，因為沒有提供 Canva 連結) -->
         <div class="tile-item">
             <div class="image-wrapper">
-                <img src="http://googleusercontent.com/image_collection/image_retrieval/15382593802454068563" alt="">
+                 <div style="width:100%; height:100%; background-color: #eee; display:flex; justify-content:center; align-items:center; color:#999; text-align:center; flex-direction:column;"><i class="fas fa-laptop-code fa-3x"></i><br><span style="margin-top:10px; font-size:12px;">[請替換為專題照片]</span></div>
             </div>
             <h3>IEYI 智慧筆記本專題</h3>
             <p>為解決課堂筆記痛點，發想結合語音辨識與雲端同步的科技產品。展現從日常痛點出發，並迅速適應科技趨勢提出創新解方的實作能力。</p>
@@ -554,8 +560,6 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: Stop observing once visible if you only want it to animate once
-                // observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
@@ -565,7 +569,6 @@ footer p { font-size: 16px; letter-spacing: 2px;}
     });
 
     // 3. 滑鼠觸碰 3D 視差微動效果 (Parallax Hover)
-    // 應用於圖片區塊
     if (window.innerWidth > 768) {
         const parallaxElements = document.querySelectorAll('.parallax-element');
         
@@ -578,7 +581,6 @@ footer p { font-size: 16px; letter-spacing: 2px;}
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
                 
-                // 計算傾斜角度 (極微小的傾斜以保持優雅)
                 const rotateX = ((y - centerY) / centerY) * -2; 
                 const rotateY = ((x - centerX) / centerX) * 2;
                 
@@ -593,4 +595,4 @@ footer p { font-size: 16px; letter-spacing: 2px;}
 </script>
 
 </body>
-</html>
+</html>>
