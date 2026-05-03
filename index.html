@@ -247,6 +247,23 @@ p, li, .subtitle {
   grid-template-columns: 1fr 1fr; 
 }
 
+/* 針對雙 iframe 設計的加寬排版 */
+.content-row-wide-right {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr; 
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 80px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.content-row-wide-right.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .text-content {
   padding: 0 20px;
 }
@@ -293,8 +310,20 @@ p, li, .subtitle {
   transition: transform 0.8s ease;
 }
 
-.content-row:hover .image-wrapper img {
+.content-row:hover .image-wrapper img, .content-row-wide-right:hover .image-wrapper img {
   transform: scale(1.05);
+}
+
+/* 雙 iframe 容器 */
+.double-iframe-container {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+.double-iframe-container .image-wrapper {
+  flex: 1;
+  height: 450px;
+  margin: 0;
 }
 
 /* Tiled Layout for Extracurricular (2 Columns) */
@@ -350,9 +379,16 @@ footer p { font-size: 16px; letter-spacing: 2px;}
 
 /* Responsive adjustments */
 @media (max-width: 992px) {
-  .content-row, .content-row.reverse { grid-template-columns: 1fr; gap: 40px;}
+  .content-row, .content-row.reverse, .content-row-wide-right { grid-template-columns: 1fr; gap: 40px;}
   .content-row.reverse .image-wrapper { order: -1; } 
   .tiled-grid { grid-template-columns: 1fr; }
+  
+  .double-iframe-container {
+    flex-direction: column;
+  }
+  .double-iframe-container .image-wrapper {
+    height: 350px; /* 手機版自適應高度 */
+  }
 }
 
 @media (max-width: 768px) {
@@ -413,8 +449,8 @@ footer p { font-size: 16px; letter-spacing: 2px;}
         <p class="section-subtitle">外語能力與跨文化探討</p>
     </div>
 
-    <!-- 藝術與文化 -->
-    <div class="content-row fade-in-section">
+    <!-- 藝術與文化 (雙簡報並排) -->
+    <div class="content-row-wide-right fade-in-section">
         <div class="text-content">
             <h3>外語報告：藝術與文化</h3>
             <p>透過全英文專題報告《The Unacceptable Masterpieces》，深入探討歷史上曾受巨大爭議的藝術傑作。</p>
@@ -425,8 +461,13 @@ footer p { font-size: 16px; letter-spacing: 2px;}
                 <span class="pill-tag">#藝術鑑賞</span>
             </div>
         </div>
-        <div class="image-wrapper parallax-element">
-            <iframe src="https://canva.link/vv9t5tfafy16yi0" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+        <div class="double-iframe-container">
+            <div class="image-wrapper parallax-element">
+                <iframe src="https://canva.link/vv9t5tfafy16yi0" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+            </div>
+            <div class="image-wrapper parallax-element">
+                <iframe src="https://canva.link/vc4bnbphm1eph64" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
+            </div>
         </div>
     </div>
     
@@ -486,7 +527,7 @@ footer p { font-size: 16px; letter-spacing: 2px;}
             <div class="image-wrapper">
                 <iframe src="https://canva.link/8povy6cfz8pfai4" style="width: 100%; height: 100%; border: none;" allowfullscreen="allowfullscreen" allow="fullscreen"></iframe>
             </div>
-            <h3>政大廣告營報告</h3>
+            <h3>政大廣告營</h3>
             <p>於高壓營隊中展現極佳的「適應力」，與陌生的團隊迅速磨合，主導並完成商品推廣企劃，最終奪得總體第二名與同品項冠軍的佳績。</p>
         </div>
         
